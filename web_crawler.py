@@ -75,18 +75,15 @@ def bs4_scrape(num):
         html = requests.get("https://www.google.com/search?q={}&start={}".format(query,start), headers=headers, timeout=30)
         soup = BeautifulSoup(html.text, 'lxml') 
 
-        for result in soup.select(".yuRUbf"):     #Channel links in the result
-            title = f'Title: {result.select_one("h3").text}'
-            link = f'Link: {result.select_one("a")["href"]}'
-            dict={title, link}           
+        for result in soup.select(".yuRUbf"):    #Channel links in the result
+           
+            dict={'Title': f'{result.select_one("h3").text}', 'Link':f'{result.select_one("a")["href"]}'}                     
             list_links.append(dict)
         
         
         
         for result in soup.select(".DhN8Cf"): #Video links in the result
-            title = f'Title: {result.select_one("h3").text}'
-            link = f'Link: {result.select_one("a")["href"]}'           
-            dict={title,link}        
+            dict={'Title': f'{result.select_one("h3").text}', 'Link':f'{result.select_one("a")["href"]}'}      
             list_links.append(dict)
         
         start += 10 
